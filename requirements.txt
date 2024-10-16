@@ -1,0 +1,8 @@
+Flask
+werkzeug
+Flask-Cors
+Flask-SQLAlchemy
+requests
+geocoder
+pandas
+python-dotenv
