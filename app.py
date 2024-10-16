@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response,render_template
+from flask import Flask, request, jsonify, make_response, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import requests
@@ -57,7 +57,8 @@ class Blacklist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ip_address = db.Column(db.String(15), nullable=False, unique=True)
 
-@app.before_first_request
+# 在第一次请求前创建数据库表
+@app.before_request
 def create_tables():
     db.create_all()
 
@@ -65,6 +66,7 @@ API_KEY = "YOUR_SECRET_API_KEY"
 @app.route('/')
 def home():
     return render_template('index.html')
+
 @app.before_request
 def check_api_key():
     if request.endpoint in ['log_visit', 'get_visits', 'get_visit_details', 'get_stats']:
@@ -173,4 +175,4 @@ def handle_exception(e):
     return jsonify({'message': messages['message']}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0',port=10000)
+    app.run(debug=True, host='0.0.0.0', port=10000)
