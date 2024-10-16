@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Insight</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .language-select {
+            margin-bottom: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+        }
+        pre {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Visitor Insight</h1>
+        <div class="language-select">
+            <label for="language">Select Language: </label>
+            <select id="language" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="zh-Hant">繁體中文</option>
+            </select>
+        </div>
+    </header>
+    <div class="container">
+        <h2>API Overview</h2>
+        <p>Visitor Insight 是一個用於跟蹤網站訪問者的 API。它支持多語言，並提供訪問者的地理位置和統計數據。</p>
+
+        <h2>API Endpoints</h2>
+        <ul>
+            <li><strong>Log Visit:</strong> <code>/api/{lang}/visit</code></li>
+            <li><strong>Get Visits:</strong> <code>/api/{lang}/visits</code></li>
+            <li><strong>Get Visit Details:</strong> <code>/api/{lang}/visits/{ip}</code></li>
+            <li><strong>Get Stats:</strong> <code>/api/{lang}/stats</code></li>
+            <li><strong>Blacklist IP:</strong> <code>/api/{lang}/blacklist</code></li>
+            <li><strong>Get Blacklist:</strong> <code>/api/{lang}/blacklist</code></li>
+            <li><strong>Download Visits:</strong> <code>/api/{lang}/download_visits</code></li>
+        </ul>
+
+        <h2>Example Usage</h2>
+        <h3>JavaScript Example</h3>
+        <pre>
+            <code>
+fetch('https://your-domain.com/api/en/visit', {
+    method: 'GET',
+    headers: {
+        'x-api-key': 'YOUR_API_KEY'
+    }
+})
+.then(response => response.json())
+.then(data => console.log(data));
+            </code>
+        </pre>
+
+        <h3>Response Example</h3>
+        <pre>
+            <code>
+{
+    "message": "Visit logged",
+    "ip": "192.168.1.1",
+    "location": "New York, NY"
+}
+            </code>
+        </pre>
+
+        <h2>Language Support</h2>
+        <p>The API supports both English and Traditional Chinese. You can choose the desired language by modifying the endpoint.</p>
+    </div>
+    <footer>
+        <p>&copy; 2024 Visitor Insight. All rights reserved.</p>
+    </footer>
+    <script>
+        function changeLanguage() {
+            const lang = document.getElementById('language').value;
+            const url = window.location.href.split('/').slice(0, -1).join('/') + '/' + lang;
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
